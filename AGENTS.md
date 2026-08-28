@@ -2,11 +2,11 @@
 
 Cross-platform mobile vocabulary builder with a chat-like LLM interface and Leitner-based spaced repetition flashcards.
 
-# Expo HAS CHANGED
+## Expo HAS CHANGED
 
 Read the exact versioned docs at https://docs.expo.dev/versions/v57.0.0/ before writing any code.
 
-# Stack
+## Stack
 
 Expo SDK 57, React Native 0.86, React 19, TypeScript 6, expo-router v57 (file-based routing).
 
@@ -34,15 +34,6 @@ src/
 assets/         — images, fonts, icons
 ```
 
-## Verification
-
-- After code change, verify with below commands:
-  - `npm run lint`
-  - `npm run ios`
-  - `npm run web`
-  - `npm run android`
-- Fix the lint and issues until all the above commands runs successfully.
-
 ## Conventions
 
 - All features should run properly in web, ios & android.
@@ -51,6 +42,19 @@ assets/         — images, fonts, icons
 - Component filenames are kebab-case (e.g. `themed-text.tsx`).
 - UI library: `@expo/ui` for built-in components.
 - Navigation: expo-router file-based routing — add screens as files in `src/app/`.
+
+## Dependencies
+
+- Ask permission before adding new dependency.
+
+## Verification
+
+- After code change, verify with below commands:
+  - `npm run lint`
+  - `npm run ios`
+  - `npm run web`
+  - `npm run android`
+- Fix the lint and issues until all the above commands runs successfully.
 
 ## Key Docs
 
