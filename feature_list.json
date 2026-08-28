@@ -1,22 +1,27 @@
 {
   "project": "vocab-builder",
-  "last_updated": "YYYY-MM-DD",
+  "last_updated": "2026-08-29",
   "features": [
     {
       "id": "chat-001",
       "priority": 1,
       "area": "chat",
-      "title": "Create a chat design ui with nativetailwind",
+      "title": "Create a chat design ui only with nativetailwind",
       "user_visible_behavior": "A user can click New Chat and see a fresh empty conversation.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "Open the app.",
         "Click New Chat.",
         "Verify a new conversation appears in the sidebar.",
         "Verify the main panel shows an empty conversation state."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "lint passes clean",
+        "web export and runtime verified — chat list and chat screen both render",
+        "iOS export and simulator verified — both screens render correctly",
+        "android export verified"
+      ],
+      "notes": "UI-only implementation with in-memory state via React context. Conversation list at / with + New Chat button; chat screen at /chat/[id] with empty state and disabled input."
     },
     {
       "id": "chat-002",
