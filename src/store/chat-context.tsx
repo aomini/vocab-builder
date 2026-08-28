@@ -1,10 +1,11 @@
 import { createContext, useContext, useState, useCallback } from "react";
+import { getCompletion } from "../services/openai";
 
 type Message = {
   id: string;
   conversationId: string;
   text: string;
-  role: "user";
+  role: "user" | "assistant";
   createdAt: number;
 };
 
@@ -51,8 +52,34 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           c.id === conversationId ? { ...c, title: text.slice(0, 30) } : c
         )
       );
+
+      const history = [...messages, message]
+        .filter((m) => m.conversationId === conversationId)
+        .map((m) => ({ role: m.role, content: m.text }));
+
+      getCompletion(history)
+        .then((responseText) => {
+          const assistantMessage: Message = {
+            id: Date.now().toString(),
+            conversationId,
+            text: responseText,
+            role: "assistant",
+            createdAt: Date.now(),
+          };
+          setMessages((prev) => [...prev, assistantMessage]);
+        })
+        .catch((err: Error) => {
+          const errorMessage: Message = {
+            id: Date.now().toString(),
+            conversationId,
+            text: `Sorry, something went wrong. ${err.message}`,
+            role: "assistant",
+            createdAt: Date.now(),
+          };
+          setMessages((prev) => [...prev, errorMessage]);
+        });
     },
-    []
+    [messages]
   );
 
   return (

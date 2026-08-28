@@ -50,15 +50,20 @@
       "area": "LLM",
       "title": "LLM should respond to the user message",
       "user_visible_behavior": "A user can see LLM response in the active thread",
-      "status": "not-started",
+      "status": "passing",
       "verification": [
         "Open an existing conversation.",
         "Type a message into the input.",
         "Submit the message.",
         "Verify the LLM response appears in the thread."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "lint passes clean",
+        "web export verified",
+        "iOS export and simulator verified — chat screen renders with input and send",
+        "android export verified"
+      ],
+      "notes": "OpenAI integration via fetch. System prompt scopes LLM to vocab/meaning queries. Messages render left-aligned gray (assistant) vs right-aligned blue (user). Error responses shown inline. Config via app.config.js exposing OPENAI_API_KEY and OPENAI_BASE_URL from .env through expo-constants."
     }
   ]
 }
