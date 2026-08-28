@@ -7,6 +7,9 @@
     "icon": "./assets/images/icon.png",
     "scheme": "firstiteration",
     "userInterfaceStyle": "automatic",
+    "web": {
+      "bundler": "metro"
+    },
     "ios": {
       "icon": "./assets/expo.icon"
     },
