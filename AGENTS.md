@@ -20,6 +20,7 @@ Before writing Code:
 - Prefer durable repo artifacts over chat summaries.
 - Do not silently change verification rules during implementation.
 - Do not remove or weaken tests just to make the task look complete.
+- NEVER read `.env` or `.env.local` files. These contain secrets and must not be accessed by any agent.
 
 ## Definition Of Done
 
