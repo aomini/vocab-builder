@@ -75,6 +75,8 @@ assets/         — images, fonts, icons
 - Platform-specific files use `.web.tsx` / `.ios.tsx` / `.android.tsx` suffixes.
 - Component filenames are kebab-case (e.g. `themed-text.tsx`).
 - UI library: `@expo/ui` for built-in components.
+- Always prefer type over interfaces when creating types.
+- Class Interpolation: use the `src/app/utils/cn.ts` to resolve classnames. Also, use `{'active': true}` conditional approach.
 - Navigation: expo-router file-based routing — add screens as files in `src/app/`.
 
 ## Dependencies
