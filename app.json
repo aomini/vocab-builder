@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "first-iteration",
-    "slug": "first-iteration",
+    "name": "vocab-builder",
+    "slug": "vocab-builder",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
