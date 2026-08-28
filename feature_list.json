@@ -43,6 +43,22 @@
         "android export verified"
       ],
       "notes": "User messages stored in ChatContext. Input wired to sendMessage which appends to messages array and updates conversation title. Messages render as right-aligned blue bubbles in a FlatList with auto-scroll."
+    },
+    {
+      "id": "llm-003",
+      "priority": 3,
+      "area": "LLM",
+      "title": "LLM should respond to the user message",
+      "user_visible_behavior": "A user can see LLM response in the active thread",
+      "status": "not-started",
+      "verification": [
+        "Open an existing conversation.",
+        "Type a message into the input.",
+        "Submit the message.",
+        "Verify the LLM response appears in the thread."
+      ],
+      "evidence": [],
+      "notes": ""
     }
   ]
 }
