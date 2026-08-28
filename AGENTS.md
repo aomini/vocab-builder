@@ -91,8 +91,10 @@ assets/         — images, fonts, icons
   - `npm run web`
   - `npm run android`
 - Fix the lint and issues until all the above commands runs successfully.
+- For iOS simulator UI verification, follow `docs/ios-simulator-verification.md` (use screenshots + deep links, not tap commands).
 
 ## Key Docs
 
 - `docs/project.md` — Product spec, core user flow, technical constraints, and decisions.
 - `docs/flashcard-implementation.md` — Leitner box system data model, progression logic, and edge cases.
+- `docs/ios-simulator-verification.md` — CLI steps for verifying UI on iOS simulator (screenshots, deep links, gotchas).
