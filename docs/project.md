@@ -26,7 +26,6 @@ _Core loop: Ask → Get definition/explanation → Save to flashcard deck → Re
   more involved update formula. Leitner needs only a box number + last
   review date, matching MVP simplicity goals. Revisit SM-2 once there's
   real usage data justifying the added complexity.
-- **LLM Provider - OpenAI**: .env contains OPENAI_API_KEY & OPENAI_BASE_URL.
 
 # Features
 

@@ -51,20 +51,8 @@ export default function ChatScreen() {
           contentContainerClassName="px-4 py-3"
           onContentSizeChange={() => listRef.current?.scrollToEnd({ animated: true })}
           renderItem={({ item }) => (
-            <View
-              className={`mb-3 max-w-[80%] rounded-2xl px-4 py-3 ${
-                item.role === "user"
-                  ? "self-end bg-blue-600"
-                  : "self-start bg-gray-200"
-              }`}
-            >
-              <Text
-                className={`text-base ${
-                  item.role === "user" ? "text-white" : "text-gray-900"
-                }`}
-              >
-                {item.text}
-              </Text>
+            <View className="mb-3 self-end max-w-[80%] rounded-2xl bg-blue-600 px-4 py-3">
+              <Text className="text-base text-white">{item.text}</Text>
             </View>
           )}
         />
