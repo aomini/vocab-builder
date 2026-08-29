@@ -12,8 +12,7 @@ type ChatMessage = {
 
 export async function POST(request: Request) {
   const apiKey = process.env.OPENAI_API_KEY ?? "";
-  const baseUrl =
-    process.env.OPENAI_BASE_URL ?? "https://api.openai.com/v1";
+  const baseUrl = process.env.OPENAI_BASE_URL ?? "https://api.openai.com/v1";
 
   const { messages } = (await request.json()) as { messages: ChatMessage[] };
 
@@ -24,7 +23,7 @@ export async function POST(request: Request) {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "gpt-4o-mini",
+      model: "openai.gpt-oss-120b",
       messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
       max_tokens: 500,
     }),
@@ -34,7 +33,7 @@ export async function POST(request: Request) {
     const error = await response.text();
     return Response.json(
       { error: `OpenAI API error: ${response.status} ${error}` },
-      { status: response.status }
+      { status: response.status },
     );
   }
 
