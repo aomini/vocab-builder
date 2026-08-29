@@ -1,6 +1,6 @@
 {
   "project": "vocab-builder",
-  "last_updated": "2026-08-29",
+  "last_updated": "2026-08-30",
   "features": [
     {
       "id": "chat-001",
@@ -50,15 +50,20 @@
       "area": "LLM",
       "title": "LLM should respond to the user message",
       "user_visible_behavior": "A user can see LLM response in the active thread",
-      "status": "not-started",
+      "status": "passing",
       "verification": [
         "Open an existing conversation.",
         "Type a message into the input.",
         "Submit the message.",
         "Verify the LLM response appears in the thread."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "lint passes clean",
+        "web export verified",
+        "iOS export and simulator verified — chat screen renders with input and Send button",
+        "android export verified"
+      ],
+      "notes": "OpenAI integration via src/api/openai.ts (following api/ convention). System prompt scopes responses to vocabulary. Assistant messages render left-aligned in gray, user messages right-aligned in blue. Error responses shown as assistant messages."
     }
   ]
 }
