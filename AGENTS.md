@@ -71,6 +71,7 @@ assets/         — images, fonts, icons
 
 ## Conventions
 
+- Environment variables can only be accessed with process.env in expo api routes and in app ui env variables should be prefixed with EXPO_PUBLIC_.
 - All features should run properly in web, ios & android.
 - Styling: CSS via `nativewind` + React Native Stylesheet where needed.
 - Platform-specific files use `.web.tsx` / `.ios.tsx` / `.android.tsx` suffixes.
@@ -98,4 +99,5 @@ assets/         — images, fonts, icons
 
 - `docs/project.md` — Product spec, core user flow, technical constraints, and decisions.
 - `docs/flashcard-implementation.md` — Leitner box system data model, progression logic, and edge cases.
+- `docs/expo-api-routes.md` — Expo Router API routes reference (file conventions, handler pattern, env vars, deployment).
 - `docs/ios-simulator-verification.md` — CLI steps for verifying UI on iOS simulator (screenshots, deep links, gotchas).

@@ -1,6 +1,3 @@
-const API_KEY = process.env.OPENAI_API_KEY ?? "";
-const BASE_URL = process.env.OPENAI_BASE_URL ?? "https://api.openai.com/v1";
-
 const SYSTEM_PROMPT = `You are a vocabulary assistant. Your role is to help users understand words, phrases, and sentences. When a user asks about a word or phrase, provide:
 - A clear, concise definition
 - Example usage in a sentence
@@ -9,18 +6,22 @@ const SYSTEM_PROMPT = `You are a vocabulary assistant. Your role is to help user
 Keep responses brief and focused on vocabulary/meaning. If a question is not related to vocabulary or language understanding, politely redirect the user to ask about words or phrases.`;
 
 type ChatMessage = {
-  role: "system" | "user" | "assistant";
+  role: "user" | "assistant";
   content: string;
 };
 
-export async function getCompletion(
-  messages: ChatMessage[]
-): Promise<string> {
-  const response = await fetch(`${BASE_URL}/chat/completions`, {
+export async function POST(request: Request) {
+  const apiKey = process.env.OPENAI_API_KEY ?? "";
+  const baseUrl =
+    process.env.OPENAI_BASE_URL ?? "https://api.openai.com/v1";
+
+  const { messages } = (await request.json()) as { messages: ChatMessage[] };
+
+  const response = await fetch(`${baseUrl}/chat/completions`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
       model: "gpt-4o-mini",
@@ -31,9 +32,12 @@ export async function getCompletion(
 
   if (!response.ok) {
     const error = await response.text();
-    throw new Error(`OpenAI API error: ${response.status} ${error}`);
+    return Response.json(
+      { error: `OpenAI API error: ${response.status} ${error}` },
+      { status: response.status }
+    );
   }
 
   const data = await response.json();
-  return data.choices[0].message.content;
+  return Response.json({ content: data.choices[0].message.content });
 }

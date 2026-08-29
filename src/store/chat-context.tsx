@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useCallback } from "react";
-import { getCompletion } from "../api/openai";
 
 type Message = {
   id: string;
@@ -57,8 +56,16 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         .filter((m) => m.conversationId === conversationId)
         .map((m) => ({ role: m.role, content: m.text }));
 
-      getCompletion(history)
-        .then((responseText) => {
+      fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history }),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error(`API error: ${res.status}`);
+          return res.json();
+        })
+        .then(({ content: responseText }) => {
           const assistantMessage: Message = {
             id: Date.now().toString(),
             conversationId,

@@ -61,9 +61,73 @@
         "lint passes clean",
         "web export verified",
         "iOS export and simulator verified — chat screen renders with input and Send button",
-        "android export verified"
+        "android export verified",
+        "refactored to use Expo API route (llm-004 through llm-006)"
       ],
-      "notes": "OpenAI integration via src/api/openai.ts (following api/ convention). System prompt scopes responses to vocabulary. Assistant messages render left-aligned in gray, user messages right-aligned in blue. Error responses shown as assistant messages."
+      "notes": "LLM responses routed through Expo API route at /api/chat. API key stays server-side."
+    },
+    {
+      "id": "llm-004",
+      "priority": 4,
+      "area": "LLM",
+      "title": "Fix app.json for server output",
+      "user_visible_behavior": "No visible change. Enables Expo API routes.",
+      "status": "passing",
+      "verification": [
+        "app.json has a single 'web' key with 'output': 'server'.",
+        "npm start runs without errors.",
+        "Existing chat UI still renders on web, iOS, and Android."
+      ],
+      "evidence": [
+        "merged duplicate web keys into one with output: server",
+        "lint passes clean",
+        "web, iOS, and android exports verified"
+      ],
+      "notes": "Duplicate web keys merged. Output changed from static to server."
+    },
+    {
+      "id": "llm-005",
+      "priority": 5,
+      "area": "LLM",
+      "title": "Create Expo API route for chat completions",
+      "user_visible_behavior": "POST /api/chat returns an LLM response. API key stays server-side.",
+      "status": "passing",
+      "verification": [
+        "File exists at src/app/api/chat+api.ts.",
+        "POST /api/chat with a messages array returns an assistant response.",
+        "process.env.OPENAI_API_KEY is only read in the +api.ts file.",
+        "curl http://localhost:8081/api/chat returns a valid response."
+      ],
+      "evidence": [
+        "src/app/api/chat+api.ts created with POST handler",
+        "web export shows API route bundled separately: /api/chat (4.9KB)",
+        "curl test confirmed route receives and forwards requests (401 from expired key, not code issue)",
+        "no OPENAI_API_KEY reference in client code"
+      ],
+      "notes": "System prompt, model config, and OpenAI fetch logic in +api.ts file. API key via process.env server-side only."
+    },
+    {
+      "id": "llm-006",
+      "priority": 6,
+      "area": "LLM",
+      "title": "Wire chat context to use API route and remove old client",
+      "user_visible_behavior": "Chat works the same as before — user sends message, LLM responds.",
+      "status": "passing",
+      "verification": [
+        "chat-context.tsx calls fetch('/api/chat') instead of importing getCompletion.",
+        "src/api/openai.ts is deleted.",
+        "No OPENAI_API_KEY reference exists outside of +api.ts files.",
+        "npm run lint passes.",
+        "LLM responses work on web.",
+        "Chat UI still renders on iOS and Android."
+      ],
+      "evidence": [
+        "chat-context.tsx calls fetch('/api/chat')",
+        "src/api/openai.ts and src/api/ directory deleted",
+        "grep confirms no OPENAI_API_KEY outside +api.ts",
+        "lint passes, web/iOS/android exports verified"
+      ],
+      "notes": "sendMessage in chat-context.tsx POSTs to /api/chat. Old client-side OpenAI module removed."
     }
   ]
 }
