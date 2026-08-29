@@ -78,7 +78,7 @@ assets/         — images, fonts, icons
 - UI library: `@expo/ui` for built-in components.
 - Always prefer type over interfaces when creating types.
 - Class Interpolation: use the `src/app/utils/cn.ts` to resolve classnames. Also, use `{'active': true}` conditional approach.
-- Navigation: expo-router file-based routing — add screens as files in `src/app/`.
+- Navigation: expo-router file-based routing — add screens as files in `src/app/`.<D-s>
 
 ## Dependencies
 

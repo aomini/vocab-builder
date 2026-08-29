@@ -1,5 +1,21 @@
 {
   "enabledPlugins": {
     "expo@claude-plugins-official": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "if": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "agent",
+            "prompt": "Review the staged changes (run `git diff --cached`) for security issues: hardcoded secrets or API keys, SQL injection, XSS, command injection, insecure data exposure, and other OWASP top 10 vulnerabilities. If you find critical security issues, set ok to false with a clear explanation. If the changes look safe, set ok to true.",
+            "timeout": 120,
+            "statusMessage": "Running security review..."
+          }
+        ]
+      }
+    ]
   }
 }

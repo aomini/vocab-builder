@@ -26,6 +26,7 @@ _Core loop: Ask → Get definition/explanation → Save to flashcard deck → Re
   more involved update formula. Leitner needs only a box number + last
   review date, matching MVP simplicity goals. Revisit SM-2 once there's
   real usage data justifying the added complexity.
+- **Requesting LLM - LLM api request is only allowed to be made from api/**: This allows a level of abstraction and system prompts should live in api/.
 
 # Features
 
