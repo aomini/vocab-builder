@@ -208,6 +208,28 @@
         "needs manual test: verify stop button aborts the stream and restores send button"
       ],
       "notes": "AbortController stored in ref. stopStreaming aborts the fetch and resets isStreaming. Partial text from the stream is preserved in the message."
+    },
+    {
+      "id": "chat-005",
+      "priority": 11,
+      "area": "chat",
+      "title": "Remove LLM chat bubble from UI if the message is empty and isStreaming is false",
+      "user_visible_behavior": "User should not see empty llm empty chat bubble when he aborts the request",
+      "status": "in-progress",
+      "verification": [
+        "User sends a message",
+        "LLM response is streaming",
+        "User clicks stop button",
+        "User should not see empty chat bubble"
+      ],
+      "evidence": [
+        "lint passes clean",
+        "web export verified",
+        "iOS export verified",
+        "android export verified",
+        "needs manual test: send a message, abort before content arrives, verify empty bubble is removed"
+      ],
+      "notes": "In sendMessage finally block, filter out the assistant message if its text is still empty. Handles abort-before-content and stream-ends-without-content cases. Messages with partial content are preserved."
     }
   ]
 }
