@@ -135,13 +135,19 @@
       "area": "LLM",
       "title": "Properly display the LLM markdown response in the chat ui with react-native-markdown-display",
       "user_visible_behavior": "The LLM response should be properly displayed as per the markdown syntax",
-      "status": "not-started",
+      "status": "in-progress",
       "verification": [
         "LLM should respond properly",
         "The llm reponse should be properly displayed in chat ui"
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "lint passes clean",
+        "web export verified",
+        "iOS export verified — chat screen renders without crash",
+        "android export verified",
+        "needs manual test: send a message and verify markdown renders in LLM response"
+      ],
+      "notes": "Assistant messages rendered with react-native-markdown-display (already installed). User messages stay as plain Text. Styles cover headings, lists, bold/italic, inline code, and code blocks."
     },
     {
       "id": "llm-008",
