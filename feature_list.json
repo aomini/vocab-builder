@@ -155,13 +155,19 @@
       "area": "LLM",
       "title": "Stream LLM response to the ui",
       "user_visible_behavior": "User should see the llm response coming in stream",
-      "status": "not-started",
+      "status": "in-progress",
       "verification": [
         "LLM responses should be streamed",
         "User should see messages coming in stream"
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "lint passes clean",
+        "web export verified",
+        "iOS export verified",
+        "android export verified",
+        "needs manual test: send a message and verify response streams in progressively"
+      ],
+      "notes": "API route forwards SSE stream from OpenAI. Chat context reads stream with ReadableStream reader, parses SSE events, and updates assistant message text progressively. Empty assistant bubble appears immediately on send."
     },
     {
       "id": "chat-003",

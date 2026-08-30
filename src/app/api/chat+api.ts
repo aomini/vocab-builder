@@ -26,6 +26,7 @@ export async function POST(request: Request) {
       model: "openai.gpt-oss-120b",
       messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
       max_tokens: 500,
+      stream: true,
     }),
   });
 
@@ -37,6 +38,11 @@ export async function POST(request: Request) {
     );
   }
 
-  const data = await response.json();
-  return Response.json({ content: data.choices[0].message.content });
+  return new Response(response.body, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive",
+    },
+  });
 }
