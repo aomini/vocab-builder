@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useCallback } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useRef,
+} from "react";
 
 type Message = {
   id: string;
@@ -17,8 +23,10 @@ type Conversation = {
 type ChatContextValue = {
   conversations: Conversation[];
   messages: Message[];
+  isStreaming: boolean;
   addConversation: () => string;
   sendMessage: (conversationId: string, text: string) => void;
+  stopStreaming: () => void;
 };
 
 const ChatContext = createContext<ChatContextValue | null>(null);
@@ -26,6 +34,14 @@ const ChatContext = createContext<ChatContextValue | null>(null);
 export function ChatProvider({ children }: { children: React.ReactNode }) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [isStreaming, setIsStreaming] = useState(false);
+  const abortRef = useRef<AbortController | null>(null);
+
+  const stopStreaming = useCallback(() => {
+    abortRef.current?.abort();
+    abortRef.current = null;
+    setIsStreaming(false);
+  }, []);
 
   const addConversation = useCallback(() => {
     const id = Date.now().toString();
@@ -68,11 +84,16 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         },
       ]);
 
+      const controller = new AbortController();
+      abortRef.current = controller;
+      setIsStreaming(true);
+
       try {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ messages: history }),
+          signal: controller.signal,
         });
 
         if (!res.ok || !res.body) {
@@ -83,36 +104,41 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         const decoder = new TextDecoder();
         let buffer = "";
 
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
 
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split("\n");
-          buffer = lines.pop() ?? "";
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split("\n");
+            buffer = lines.pop() ?? "";
 
-          for (const line of lines) {
-            const trimmed = line.trim();
-            if (!trimmed.startsWith("data: ") || trimmed === "data: [DONE]")
-              continue;
-            try {
-              const json = JSON.parse(trimmed.slice(6));
-              const content = json.choices?.[0]?.delta?.content;
-              if (content) {
-                setMessages((prev) =>
-                  prev.map((m) =>
-                    m.id === assistantId
-                      ? { ...m, text: m.text + content }
-                      : m
-                  )
-                );
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (!trimmed.startsWith("data: ") || trimmed === "data: [DONE]")
+                continue;
+              try {
+                const json = JSON.parse(trimmed.slice(6));
+                const content = json.choices?.[0]?.delta?.content;
+                if (content) {
+                  setMessages((prev) =>
+                    prev.map((m) =>
+                      m.id === assistantId
+                        ? { ...m, text: m.text + content }
+                        : m
+                    )
+                  );
+                }
+              } catch {
+                // skip malformed SSE lines
               }
-            } catch {
-              // skip malformed SSE lines
             }
           }
+        } finally {
+          reader.releaseLock();
         }
       } catch (err) {
+        if (err instanceof DOMException && err.name === "AbortError") return;
         const message = err instanceof Error ? err.message : "Unknown error";
         setMessages((prev) =>
           prev.map((m) =>
@@ -121,13 +147,16 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
               : m
           )
         );
+      } finally {
+        abortRef.current = null;
+        setIsStreaming(false);
       }
     },
     [messages]
   );
 
   return (
-    <ChatContext value={{ conversations, messages, addConversation, sendMessage }}>
+    <ChatContext value={{ conversations, messages, isStreaming, addConversation, sendMessage, stopStreaming }}>
       {children}
     </ChatContext>
   );
