@@ -135,7 +135,7 @@
       "area": "LLM",
       "title": "Properly display the LLM markdown response in the chat ui with react-native-markdown-display",
       "user_visible_behavior": "The LLM response should be properly displayed as per the markdown syntax",
-      "status": "in-progress",
+      "status": "passing",
       "verification": [
         "LLM should respond properly",
         "The llm reponse should be properly displayed in chat ui"
@@ -155,7 +155,7 @@
       "area": "LLM",
       "title": "Stream LLM response to the ui",
       "user_visible_behavior": "User should see the llm response coming in stream",
-      "status": "in-progress",
+      "status": "passing",
       "verification": [
         "LLM responses should be streamed",
         "User should see messages coming in stream"
@@ -175,7 +175,7 @@
       "area": "chat",
       "title": "Update the chat UI, to replace send with a stop button",
       "user_visible_behavior": "User should see stop button instead of send when llm repsonse stream is not finished",
-      "status": "in-progress",
+      "status": "passing",
       "verification": [
         "User sends a message",
         "LLM response is streamed",
@@ -195,7 +195,7 @@
       "area": "chat",
       "title": "Stop LLM response when stop button is clicked",
       "user_visible_behavior": "User should be able to stop the llm response",
-      "status": "in-progress",
+      "status": "passing",
       "verification": [
         "User sends a message",
         "LLM response is streaming",
@@ -215,7 +215,7 @@
       "area": "chat",
       "title": "Remove LLM chat bubble from UI if the message is empty and isStreaming is false",
       "user_visible_behavior": "User should not see empty llm empty chat bubble when he aborts the request",
-      "status": "in-progress",
+      "status": "passing",
       "verification": [
         "User sends a message",
         "LLM response is streaming",
