@@ -41,7 +41,7 @@ export default function ChatScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
-  const { messages, sendMessage } = useChat();
+  const { messages, sendMessage, isStreaming, stopStreaming } = useChat();
   const [input, setInput] = useState("");
   const listRef = useRef<FlatList>(null);
 
@@ -112,12 +112,21 @@ export default function ChatScreen() {
             onSubmitEditing={handleSend}
             returnKeyType="send"
           />
-          <Pressable
-            onPress={handleSend}
-            className="ml-2 rounded-full bg-blue-600 px-4 py-2"
-          >
-            <Text className="font-medium text-white">Send</Text>
-          </Pressable>
+          {isStreaming ? (
+            <Pressable
+              onPress={stopStreaming}
+              className="ml-2 rounded-full bg-red-500 px-4 py-2"
+            >
+              <Text className="font-medium text-white">Stop</Text>
+            </Pressable>
+          ) : (
+            <Pressable
+              onPress={handleSend}
+              className="ml-2 rounded-full bg-blue-600 px-4 py-2"
+            >
+              <Text className="font-medium text-white">Send</Text>
+            </Pressable>
+          )}
         </View>
       </View>
     </View>

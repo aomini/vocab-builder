@@ -155,13 +155,19 @@
       "area": "LLM",
       "title": "Stream LLM response to the ui",
       "user_visible_behavior": "User should see the llm response coming in stream",
-      "status": "not-started",
+      "status": "in-progress",
       "verification": [
         "LLM responses should be streamed",
         "User should see messages coming in stream"
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "lint passes clean",
+        "web export verified",
+        "iOS export verified",
+        "android export verified",
+        "needs manual test: send a message and verify response streams in progressively"
+      ],
+      "notes": "API route forwards SSE stream from OpenAI. Chat context reads stream with ReadableStream reader, parses SSE events, and updates assistant message text progressively. Empty assistant bubble appears immediately on send."
     },
     {
       "id": "chat-003",
@@ -169,15 +175,19 @@
       "area": "chat",
       "title": "Update the chat UI, to replace send with a stop button",
       "user_visible_behavior": "User should see stop button instead of send when llm repsonse stream is not finished",
-      "status": "not-started",
+      "status": "in-progress",
       "verification": [
         "User sends a message",
         "LLM response is streamed",
         "User sees stop button instead of send",
         "After, the llm response streaming is complete, restores send button hiding stop button"
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "lint passes clean",
+        "web, iOS, android exports verified",
+        "needs manual test: verify stop button appears during streaming and reverts to send after"
+      ],
+      "notes": "Send button swaps to red Stop button when isStreaming is true. Reverts when streaming completes or is aborted."
     },
     {
       "id": "chat-004",
@@ -185,15 +195,19 @@
       "area": "chat",
       "title": "Stop LLM response when stop button is clicked",
       "user_visible_behavior": "User should be able to stop the llm response",
-      "status": "not-started",
+      "status": "in-progress",
       "verification": [
         "User sends a message",
         "LLM response is streaming",
         "User clicks stop button",
         "llm streaming is stopped and chat ui is restored"
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "lint passes clean",
+        "web, iOS, android exports verified",
+        "needs manual test: verify stop button aborts the stream and restores send button"
+      ],
+      "notes": "AbortController stored in ref. stopStreaming aborts the fetch and resets isStreaming. Partial text from the stream is preserved in the message."
     }
   ]
 }
