@@ -15,7 +15,7 @@ Before writing Code:
 
 ## Working Rules
 
-- Work on one feature at a moment.
+- Work on one feature at a moment in a separate branch.
 - Do not mark a feature complete just because code was added.
 - Prefer durable repo artifacts over chat summaries.
 - Do not silently change verification rules during implementation.
@@ -30,6 +30,7 @@ A feature is done only when all of the following are true:
 - the required verification actually ran
 - evidence is recorded in `feature_list.json` with status passing
 - the repository remains restartable from the standard startup path
+- pr is created
 
 ## End Of Session
 
