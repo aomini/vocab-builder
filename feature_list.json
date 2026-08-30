@@ -128,6 +128,66 @@
         "lint passes, web/iOS/android exports verified"
       ],
       "notes": "sendMessage in chat-context.tsx POSTs to /api/chat. Old client-side OpenAI module removed."
+    },
+    {
+      "id": "llm-007",
+      "priority": 7,
+      "area": "LLM",
+      "title": "Properly display the LLM markdown response in the chat ui",
+      "user_visible_behavior": "The LLM response should be properly displayed as per the markdown syntax",
+      "status": "not-started",
+      "verification": [
+        "LLM should respond properly",
+        "The llm reponse should be properly displayed in chat ui"
+      ],
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "id": "llm-008",
+      "priority": 8,
+      "area": "LLM",
+      "title": "Stream LLM response to the ui",
+      "user_visible_behavior": "User should see the llm response coming in stream",
+      "status": "not-started",
+      "verification": [
+        "LLM responses should be streamed",
+        "User should see messages coming in stream"
+      ],
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "id": "chat-003",
+      "priority": 9,
+      "area": "chat",
+      "title": "Update the chat UI, to replace send with a stop button",
+      "user_visible_behavior": "User should see stop button instead of send when llm repsonse stream is not finished",
+      "status": "not-started",
+      "verification": [
+        "User sends a message",
+        "LLM response is streamed",
+        "User sees stop button instead of send",
+        "After, the llm response streaming is complete, restores send button hiding stop button"
+      ],
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "id": "chat-004",
+      "priority": 10,
+      "area": "chat",
+      "title": "Stop LLM response when stop button is clicked",
+      "user_visible_behavior": "User should be able to stop the llm response",
+      "status": "not-started",
+      "verification": [
+        "User sends a message",
+        "LLM response is streaming",
+        "User clicks stop button",
+        "llm streaming is stopped and chat ui is restored"
+      ],
+      "evidence": [],
+      "notes": ""
     }
   ]
 }

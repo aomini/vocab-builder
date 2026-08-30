@@ -35,3 +35,4 @@ _Core loop: Ask → Get definition/explanation → Save to flashcard deck → Re
 - User should be able to view chat history.
 - User should be able to read through flashcards, reviewed on a spaced-repetition schedule.
 - App should figure out longer unsure questions and looks up meaning for that.
+- The LLM response should be properly displayed parsing the markdown.
