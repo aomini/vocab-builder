@@ -30,7 +30,7 @@ A feature is done only when all of the following are true:
 - the required verification actually ran
 - evidence is recorded in `feature_list.json` with status passing
 - the repository remains restartable from the standard startup path
-- pr is created
+- pr is created, use gh stacks if the features are stackable
 
 ## End Of Session
 
