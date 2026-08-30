@@ -1,8 +1,41 @@
 import { useState, useRef } from "react";
-import { View, Text, TextInput, Pressable, FlatList } from "react-native";
+import { View, Text, TextInput, Pressable, FlatList, StyleSheet } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Markdown from "react-native-markdown-display";
 import { useChat } from "../../store/chat-context";
+
+const markdownStyles = StyleSheet.create({
+  body: { color: "#111827", fontSize: 16, lineHeight: 22 },
+  paragraph: { marginTop: 0, marginBottom: 8 },
+  heading1: { fontSize: 22, fontWeight: "700", marginBottom: 8 },
+  heading2: { fontSize: 20, fontWeight: "700", marginBottom: 6 },
+  heading3: { fontSize: 18, fontWeight: "600", marginBottom: 4 },
+  bullet_list: { marginBottom: 8 },
+  ordered_list: { marginBottom: 8 },
+  list_item: { marginBottom: 2 },
+  strong: { fontWeight: "700" },
+  em: { fontStyle: "italic" },
+  code_inline: {
+    backgroundColor: "#d1d5db",
+    borderRadius: 4,
+    paddingHorizontal: 4,
+    paddingVertical: 1,
+    fontFamily: "monospace",
+    fontSize: 14,
+  },
+  fence: {
+    backgroundColor: "#1f2937",
+    borderRadius: 8,
+    padding: 12,
+    marginVertical: 8,
+  },
+  code_block: {
+    color: "#f9fafb",
+    fontFamily: "monospace",
+    fontSize: 14,
+  },
+});
 
 export default function ChatScreen() {
   const router = useRouter();
@@ -58,13 +91,11 @@ export default function ChatScreen() {
                   : "self-start bg-gray-200"
               }`}
             >
-              <Text
-                className={`text-base ${
-                  item.role === "user" ? "text-white" : "text-gray-900"
-                }`}
-              >
-                {item.text}
-              </Text>
+              {item.role === "user" ? (
+                <Text className="text-base text-white">{item.text}</Text>
+              ) : (
+                <Markdown style={markdownStyles}>{item.text}</Markdown>
+              )}
             </View>
           )}
         />
