@@ -38,7 +38,11 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   const abortRef = useRef<AbortController | null>(null);
 
   const stopStreaming = useCallback(() => {
-    abortRef.current?.abort();
+    try {
+      abortRef.current?.abort("Requested abort");
+    } catch {
+      // abort() can synchronously throw on some platforms
+    }
     abortRef.current = null;
     setIsStreaming(false);
   }, []);
@@ -64,8 +68,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       setMessages((prev) => [...prev, userMessage]);
       setConversations((prev) =>
         prev.map((c) =>
-          c.id === conversationId ? { ...c, title: text.slice(0, 30) } : c
-        )
+          c.id === conversationId ? { ...c, title: text.slice(0, 30) } : c,
+        ),
       );
 
       const history = [...messages, userMessage]
@@ -125,8 +129,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                     prev.map((m) =>
                       m.id === assistantId
                         ? { ...m, text: m.text + content }
-                        : m
-                    )
+                        : m,
+                    ),
                   );
                 }
               } catch {
@@ -138,25 +142,34 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           reader.releaseLock();
         }
       } catch (err) {
-        if (err instanceof DOMException && err.name === "AbortError") return;
+        if (controller.signal.aborted) return;
         const message = err instanceof Error ? err.message : "Unknown error";
         setMessages((prev) =>
           prev.map((m) =>
             m.id === assistantId
               ? { ...m, text: `Sorry, something went wrong. ${message}` }
-              : m
-          )
+              : m,
+          ),
         );
       } finally {
         abortRef.current = null;
         setIsStreaming(false);
       }
     },
-    [messages]
+    [messages],
   );
 
   return (
-    <ChatContext value={{ conversations, messages, isStreaming, addConversation, sendMessage, stopStreaming }}>
+    <ChatContext
+      value={{
+        conversations,
+        messages,
+        isStreaming,
+        addConversation,
+        sendMessage,
+        stopStreaming,
+      }}
+    >
       {children}
     </ChatContext>
   );
