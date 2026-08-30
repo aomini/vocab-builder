@@ -133,7 +133,7 @@
       "id": "llm-007",
       "priority": 7,
       "area": "LLM",
-      "title": "Properly display the LLM markdown response in the chat ui",
+      "title": "Properly display the LLM markdown response in the chat ui with react-native-markdown-display",
       "user_visible_behavior": "The LLM response should be properly displayed as per the markdown syntax",
       "status": "not-started",
       "verification": [
