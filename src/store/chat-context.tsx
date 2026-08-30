@@ -154,6 +154,9 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       } finally {
         abortRef.current = null;
         setIsStreaming(false);
+        setMessages((prev) =>
+          prev.filter((m) => !(m.id === assistantId && m.text === "")),
+        );
       }
     },
     [messages],
