@@ -66,6 +66,7 @@ src/
   components/   — shared UI components
   components/ui/ — low-level reusable primitives
   constants/    — theme, config values
+  store/        - state mangement
   hooks/        — custom React hooks
 assets/         — images, fonts, icons
 ```
@@ -81,10 +82,6 @@ assets/         — images, fonts, icons
 - Always prefer type over interfaces when creating types.
 - Class Interpolation: use the `src/app/utils/cn.ts` to resolve classnames. Also, use `{'active': true}` conditional approach.
 - Navigation: expo-router file-based routing — add screens as files in `src/app/`.<D-s>
-
-## Dependencies
-
-- Ask permission before adding new dependency.
 
 ## Verification
 
