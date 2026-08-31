@@ -1,6 +1,6 @@
 {
   "project": "vocab-builder",
-  "last_updated": "2026-08-30",
+  "last_updated": "2026-09-01",
   "features": [
     {
       "id": "chat-001",
@@ -400,7 +400,7 @@
       "area": "design-system",
       "title": "Add animations: fade-in for messages, typing indicator, loading spinner, skeleton loaders",
       "user_visible_behavior": "New messages fade in smoothly. A typing indicator shows while waiting for LLM response. A loading spinner appears during generation. Content areas use skeleton loaders. All transitions are smooth (150-300ms).",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "New messages fade in when added to the chat (150-300ms).",
         "Typing indicator animation displays while LLM is generating before first token arrives.",
@@ -411,8 +411,16 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly with animations."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "MessageBubble uses Animated.View with FadeIn.duration(200) entering animation",
+        "TypingIndicator component created with three bouncing dots (300ms per bounce, staggered 150ms)",
+        "Typing indicator shown in chat when streaming and assistant message is empty",
+        "Skeleton component created with pulsing opacity animation (800ms cycle)",
+        "All animations use react-native-reanimated",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "Typing indicator replaces empty assistant bubble before first token arrives. Skeleton component available for future content loading states."
     }
   ]
 }

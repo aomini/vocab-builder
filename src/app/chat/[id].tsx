@@ -6,6 +6,7 @@ import { useChat } from "../../store/chat-context";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { MessageBubble } from "../../components/message-bubble";
+import { TypingIndicator } from "../../components/typing-indicator";
 
 export default function ChatScreen() {
   const router = useRouter();
@@ -16,6 +17,9 @@ export default function ChatScreen() {
   const listRef = useRef<FlatList>(null);
 
   const conversationMessages = messages.filter((m) => m.conversationId === id);
+  const lastMessage = conversationMessages[conversationMessages.length - 1];
+  const showTyping =
+    isStreaming && lastMessage?.role === "assistant" && !lastMessage.text;
 
   const handleSend = () => {
     const trimmed = input.trim();
@@ -61,6 +65,7 @@ export default function ChatScreen() {
           renderItem={({ item }) => (
             <MessageBubble role={item.role} text={item.text} />
           )}
+          ListFooterComponent={showTyping ? <TypingIndicator /> : null}
         />
       )}
 
