@@ -346,7 +346,7 @@
       "area": "design-system",
       "title": "Extract reusable Card component",
       "user_visible_behavior": "Conversation list items display as cards with subtle border or shadow, 8px rounded corners, consistent padding, and hover state with slight shadow increase.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "src/components/ui/card.tsx exists as a reusable component.",
         "Conversation list items in index.tsx use the Card component.",
@@ -357,8 +357,14 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "src/components/ui/card.tsx created with border, rounded-lg, p-4, optional onPress",
+        "conversation list items in index.tsx use Card component",
+        "unused Pressable import removed from index.tsx",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "Card uses Pressable internally with border-border and bg-background. Accepts children and optional onPress."
     },
     {
       "id": "ds-006",
