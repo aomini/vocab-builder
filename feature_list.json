@@ -1,6 +1,6 @@
 {
   "project": "vocab-builder",
-  "last_updated": "2026-08-30",
+  "last_updated": "2026-09-01",
   "features": [
     {
       "id": "chat-001",
@@ -237,7 +237,7 @@
       "area": "design-system",
       "title": "Set up design tokens in Tailwind config and constants",
       "user_visible_behavior": "No visible change yet. Establishes the color palette, typography, and spacing tokens that all subsequent design system features build on.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "tailwind.config.js theme.extend defines: primary (#CC785C), background (white), surface (#F5F5F5), text (#1A1A1A), border (#E5E5E5).",
         "tailwind.config.js theme.extend defines fontFamily using the CSS variables in global.css (Inter, SF Pro, Roboto, system-ui stack).",
@@ -245,8 +245,14 @@
         "npm run lint passes.",
         "Existing UI still renders on web, iOS, and Android (no regressions)."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "tailwind.config.js updated with colors (primary, background, surface, text, border) and fontFamily (sans, display, mono, rounded, serif)",
+        "lint passes clean",
+        "web export verified — CSS bundle generated",
+        "iOS export verified",
+        "android export verified"
+      ],
+      "notes": "Also fixed pre-existing prettier lint errors in [id].tsx."
     },
     {
       "id": "ds-002",
@@ -254,7 +260,7 @@
       "area": "design-system",
       "title": "Apply design system color palette across existing UI",
       "user_visible_behavior": "App uses orange/amber (#CC785C) as primary color instead of blue. Backgrounds, text, and borders match the design system spec.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "All primary buttons (New Chat, Send) use bg-primary (orange/amber) instead of bg-blue-600.",
         "Back button and links use text-primary instead of text-blue-600.",
@@ -266,8 +272,19 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly with the new palette."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "bg-blue-600 replaced with bg-primary on New Chat and Send buttons",
+        "text-blue-600 replaced with text-primary on back arrow",
+        "bg-gray-50/bg-gray-100 replaced with bg-surface for conversation list items and input area",
+        "text-gray-900 replaced with text-text for headings and body text",
+        "border-gray-200 replaced with border-border",
+        "markdown body color updated from #111827 to #1A1A1A",
+        "user bubble changed from bg-blue-600 to bg-surface, assistant bubble background removed per spec",
+        "grep confirms zero remaining bg-blue-600 or text-blue-600 references",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "User message text changed from white to text-text since bubble is now light. Assistant messages left-aligned with no background per design spec."
     },
     {
       "id": "ds-003",
@@ -275,7 +292,7 @@
       "area": "design-system",
       "title": "Extract reusable Button component with variants",
       "user_visible_behavior": "Buttons across the app have consistent styling with primary (orange/amber bg, white text, rounded), secondary (border style), icon (square with hover bg), and disabled (reduced opacity) variants.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "src/components/ui/button.tsx exists with primary, secondary, icon, and disabled variants.",
         "New Chat, Send, and Stop buttons use the Button component instead of inline Pressable.",
@@ -286,8 +303,15 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "src/components/ui/button.tsx created with primary, secondary, icon, danger variants plus disabled state",
+        "New Chat button in index.tsx uses Button component",
+        "Back, Send, Stop buttons in [id].tsx use Button component",
+        "Unused Pressable import removed from [id].tsx",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "Added danger variant for Stop button (red bg). Uses cn utility for class merging."
     },
     {
       "id": "ds-004",
@@ -295,7 +319,7 @@
       "area": "design-system",
       "title": "Extract reusable Input component with focus ring, error states, and character counter",
       "user_visible_behavior": "Chat input has a visible focus ring, placeholder text in gray. Input component supports error states (red) and an optional character counter.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "src/components/ui/input.tsx exists as a reusable component.",
         "Chat input uses the Input component instead of inline TextInput.",
@@ -307,8 +331,14 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "src/components/ui/input.tsx created with focus ring, error state, character counter, multiline support",
+        "chat screen [id].tsx uses Input component instead of inline TextInput",
+        "unused TextInput import removed from [id].tsx",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "Focus ring uses border-primary on focus. Error state shows red border + error text. Character counter optional via showCharacterCount + maxLength props."
     },
     {
       "id": "ds-005",
@@ -316,7 +346,7 @@
       "area": "design-system",
       "title": "Extract reusable Card component",
       "user_visible_behavior": "Conversation list items display as cards with subtle border or shadow, 8px rounded corners, consistent padding, and hover state with slight shadow increase.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "src/components/ui/card.tsx exists as a reusable component.",
         "Conversation list items in index.tsx use the Card component.",
@@ -327,8 +357,14 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "src/components/ui/card.tsx created with border, rounded-lg, p-4, optional onPress",
+        "conversation list items in index.tsx use Card component",
+        "unused Pressable import removed from index.tsx",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "Card uses Pressable internally with border-border and bg-background. Accepts children and optional onPress."
     },
     {
       "id": "ds-006",
@@ -336,7 +372,7 @@
       "area": "design-system",
       "title": "Extract reusable MessageBubble component with correct spec colors",
       "user_visible_behavior": "User messages are right-aligned with a subtle background. Assistant messages are left-aligned with no background. Both use consistent styling extracted into a shared component.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "src/components/message-bubble.tsx exists as a reusable component.",
         "Chat screen uses MessageBubble instead of inline bubble rendering.",
@@ -347,8 +383,16 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "src/components/message-bubble.tsx created with user (right-aligned, bg-surface) and assistant (left-aligned, no bg) variants",
+        "chat screen [id].tsx uses MessageBubble in renderItem",
+        "markdown styles moved to message-bubble.tsx with design token colors",
+        "code_inline backgroundColor updated to #E5E5E5 (border token)",
+        "unused Markdown, StyleSheet imports removed from [id].tsx",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "User text uses leading-relaxed for comfortable line-height. Assistant messages render markdown via react-native-markdown-display."
     },
     {
       "id": "ds-007",
@@ -356,7 +400,7 @@
       "area": "design-system",
       "title": "Add animations: fade-in for messages, typing indicator, loading spinner, skeleton loaders",
       "user_visible_behavior": "New messages fade in smoothly. A typing indicator shows while waiting for LLM response. A loading spinner appears during generation. Content areas use skeleton loaders. All transitions are smooth (150-300ms).",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "New messages fade in when added to the chat (150-300ms).",
         "Typing indicator animation displays while LLM is generating before first token arrives.",
@@ -367,8 +411,16 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly with animations."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "MessageBubble uses Animated.View with FadeIn.duration(200) entering animation",
+        "TypingIndicator component created with three bouncing dots (300ms per bounce, staggered 150ms)",
+        "Typing indicator shown in chat when streaming and assistant message is empty",
+        "Skeleton component created with pulsing opacity animation (800ms cycle)",
+        "All animations use react-native-reanimated",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "Typing indicator replaces empty assistant bubble before first token arrives. Skeleton component available for future content loading states."
     }
   ]
 }
