@@ -14,12 +14,12 @@ export default function Index() {
   };
 
   return (
-    <View className="flex-1 bg-white" style={{ paddingTop: insets.top }}>
-      <View className="flex-row items-center justify-between border-b border-gray-200 px-4 py-4">
-        <Text className="text-2xl font-bold text-gray-900">Chats</Text>
+    <View className="flex-1 bg-background" style={{ paddingTop: insets.top }}>
+      <View className="flex-row items-center justify-between border-b border-border px-4 py-4">
+        <Text className="text-2xl font-bold text-text">Chats</Text>
         <Pressable
           onPress={handleNewChat}
-          className="rounded-full bg-blue-600 px-4 py-2"
+          className="rounded-full bg-primary px-4 py-2"
         >
           <Text className="font-medium text-white">+ New Chat</Text>
         </Pressable>
@@ -28,7 +28,7 @@ export default function Index() {
       {conversations.length === 0 ? (
         <View className="flex-1 items-center justify-center px-6">
           <Text className="text-4xl">📚</Text>
-          <Text className="mt-4 text-center text-lg font-medium text-gray-700">
+          <Text className="mt-4 text-center text-lg font-medium text-text">
             No conversations yet
           </Text>
           <Text className="mt-2 text-center text-sm text-gray-400">
@@ -43,9 +43,9 @@ export default function Index() {
           renderItem={({ item }) => (
             <Pressable
               onPress={() => router.push(`/chat/${item.id}`)}
-              className="mb-2 rounded-xl bg-gray-50 px-4 py-4"
+              className="mb-2 rounded-xl bg-surface px-4 py-4"
             >
-              <Text className="text-base font-medium text-gray-900">
+              <Text className="text-base font-medium text-text">
                 {item.title}
               </Text>
               <Text className="mt-1 text-xs text-gray-400">

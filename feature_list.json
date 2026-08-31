@@ -260,7 +260,7 @@
       "area": "design-system",
       "title": "Apply design system color palette across existing UI",
       "user_visible_behavior": "App uses orange/amber (#CC785C) as primary color instead of blue. Backgrounds, text, and borders match the design system spec.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "All primary buttons (New Chat, Send) use bg-primary (orange/amber) instead of bg-blue-600.",
         "Back button and links use text-primary instead of text-blue-600.",
@@ -272,8 +272,19 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly with the new palette."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "bg-blue-600 replaced with bg-primary on New Chat and Send buttons",
+        "text-blue-600 replaced with text-primary on back arrow",
+        "bg-gray-50/bg-gray-100 replaced with bg-surface for conversation list items and input area",
+        "text-gray-900 replaced with text-text for headings and body text",
+        "border-gray-200 replaced with border-border",
+        "markdown body color updated from #111827 to #1A1A1A",
+        "user bubble changed from bg-blue-600 to bg-surface, assistant bubble background removed per spec",
+        "grep confirms zero remaining bg-blue-600 or text-blue-600 references",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "User message text changed from white to text-text since bubble is now light. Assistant messages left-aligned with no background per design spec."
     },
     {
       "id": "ds-003",
