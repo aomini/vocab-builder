@@ -8,6 +8,13 @@
         "matcher": "Bash",
         "hooks": [
           {
+            "type": "command",
+            "if": "Bash(git add *)",
+            "command": "npm run pretty",
+            "timeout": 30,
+            "statusMessage": "Running prettier..."
+          },
+          {
             "type": "agent",
             "if": "Bash(git commit *)",
             "prompt": "Review the staged changes (run `git diff --cached`) for security issues: hardcoded secrets or API keys, SQL injection, XSS, command injection, insecure data exposure, and other OWASP top 10 vulnerabilities. If you find critical security issues, set ok to false with a clear explanation. If the changes look safe, set ok to true.",
