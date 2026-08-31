@@ -237,7 +237,7 @@
       "area": "design-system",
       "title": "Set up design tokens in Tailwind config and constants",
       "user_visible_behavior": "No visible change yet. Establishes the color palette, typography, and spacing tokens that all subsequent design system features build on.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "tailwind.config.js theme.extend defines: primary (#CC785C), background (white), surface (#F5F5F5), text (#1A1A1A), border (#E5E5E5).",
         "tailwind.config.js theme.extend defines fontFamily using the CSS variables in global.css (Inter, SF Pro, Roboto, system-ui stack).",
@@ -245,8 +245,14 @@
         "npm run lint passes.",
         "Existing UI still renders on web, iOS, and Android (no regressions)."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "tailwind.config.js updated with colors (primary, background, surface, text, border) and fontFamily (sans, display, mono, rounded, serif)",
+        "lint passes clean",
+        "web export verified — CSS bundle generated",
+        "iOS export verified",
+        "android export verified"
+      ],
+      "notes": "Also fixed pre-existing prettier lint errors in [id].tsx."
     },
     {
       "id": "ds-002",
