@@ -372,7 +372,7 @@
       "area": "design-system",
       "title": "Extract reusable MessageBubble component with correct spec colors",
       "user_visible_behavior": "User messages are right-aligned with a subtle background. Assistant messages are left-aligned with no background. Both use consistent styling extracted into a shared component.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "src/components/message-bubble.tsx exists as a reusable component.",
         "Chat screen uses MessageBubble instead of inline bubble rendering.",
@@ -383,8 +383,16 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "src/components/message-bubble.tsx created with user (right-aligned, bg-surface) and assistant (left-aligned, no bg) variants",
+        "chat screen [id].tsx uses MessageBubble in renderItem",
+        "markdown styles moved to message-bubble.tsx with design token colors",
+        "code_inline backgroundColor updated to #E5E5E5 (border token)",
+        "unused Markdown, StyleSheet imports removed from [id].tsx",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "User text uses leading-relaxed for comfortable line-height. Assistant messages render markdown via react-native-markdown-display."
     },
     {
       "id": "ds-007",

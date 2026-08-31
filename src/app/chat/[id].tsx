@@ -1,43 +1,11 @@
 import { useState, useRef } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Markdown from "react-native-markdown-display";
 import { useChat } from "../../store/chat-context";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
-
-const markdownStyles = StyleSheet.create({
-  body: { color: "#1A1A1A", fontSize: 16, lineHeight: 22 },
-  paragraph: { marginTop: 0, marginBottom: 8 },
-  heading1: { fontSize: 22, fontWeight: "700", marginBottom: 8 },
-  heading2: { fontSize: 20, fontWeight: "700", marginBottom: 6 },
-  heading3: { fontSize: 18, fontWeight: "600", marginBottom: 4 },
-  bullet_list: { marginBottom: 8 },
-  ordered_list: { marginBottom: 8 },
-  list_item: { marginBottom: 2 },
-  strong: { fontWeight: "700" },
-  em: { fontStyle: "italic" },
-  code_inline: {
-    backgroundColor: "#d1d5db",
-    borderRadius: 4,
-    paddingHorizontal: 4,
-    paddingVertical: 1,
-    fontFamily: "monospace",
-    fontSize: 14,
-  },
-  fence: {
-    backgroundColor: "#1f2937",
-    borderRadius: 8,
-    padding: 12,
-    marginVertical: 8,
-  },
-  code_block: {
-    color: "#f9fafb",
-    fontFamily: "monospace",
-    fontSize: 14,
-  },
-});
+import { MessageBubble } from "../../components/message-bubble";
 
 export default function ChatScreen() {
   const router = useRouter();
@@ -91,15 +59,7 @@ export default function ChatScreen() {
             listRef.current?.scrollToEnd({ animated: true })
           }
           renderItem={({ item }) => (
-            <View
-              className={`mb-3 max-w-[80%] rounded-2xl px-4 py-3 ${item.role === "user" ? "self-end bg-surface" : "self-start"}`}
-            >
-              {item.role === "user" ? (
-                <Text className="text-base text-text">{item.text}</Text>
-              ) : (
-                <Markdown style={markdownStyles}>{item.text}</Markdown>
-              )}
-            </View>
+            <MessageBubble role={item.role} text={item.text} />
           )}
         />
       )}
