@@ -9,6 +9,13 @@
         "hooks": [
           {
             "type": "command",
+            "if": "Bash(git push*)",
+            "command": ".claude/scripts/block-main-push.sh",
+            "timeout": 10,
+            "statusMessage": "Checking branch before push..."
+          },
+          {
+            "type": "command",
             "if": "Bash(git add *)",
             "command": "npm run pretty",
             "timeout": 30,
