@@ -22,7 +22,7 @@ _Core loop: Ask → Get definition/explanation → Save to flashcard deck → Re
 
 - **Flashcard algorithm — Leitner vs SM-2**: Chose Leitner for MVP.
   SM-2 gives better long-term retention via per-card ease factors, but
-  requires more state (ease factor, interval, repetition count) and a
+  requires more state (ease factor, iterval, repetition count) and a
   more involved update formula. Leitner needs only a box number + last
   review date, matching MVP simplicity goals. Revisit SM-2 once there's
   real usage data justifying the added complexity.
@@ -37,3 +37,7 @@ _Core loop: Ask → Get definition/explanation → Save to flashcard deck → Re
 - App should figure out longer unsure questions and looks up meaning for that.
 - The LLM streamed response should be properly displayed parsing the markdown.
 - User should be able to stop llm response.
+
+# Design System
+
+@docs/design-system.yaml

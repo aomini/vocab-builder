@@ -1,0 +1,38 @@
+design_system:
+  color_palette:
+    - Primary: Orange/amber accent (#CC785C)
+    - Background: White
+    - Surface: Light gray (#F5F5F5)
+    - Text: Near black (#1A1A1A)
+    - Borders: Light gray (#E5E5E5)
+  typography:
+    - Sans-serif system font stack (Inter, SF Pro, Roboto, system-ui)
+    - Headings: font-semibold
+    - Body: font-normal, leading-relaxed
+    - Message text: text-base (16px), comfortable line-height
+  components:
+    message_bubble:
+      - User messages: Right-aligned, subtle background
+      - Assistant messages: Left-aligned, no background
+    buttons:
+      - Primary: Orange/amber background, white text, rounded
+      - Secondary: Border style with hover fill
+      - Icon buttons: Square with hover background
+      - Disabled state: Reduced opacity, no pointer events
+    inputs:
+      - Rounded borders with focus ring
+      - Textarea auto-resize
+      - Placeholder text in gray
+      - Error states in red
+      - Character counter
+    cards:
+      - Subtle border or shadow
+      - Rounded corners (8px)
+      - Padding: p-4 to p-6
+      - Hover state: slight shadow increase
+  animations:
+    - Smooth transitions (150-300ms)
+    - Fade-in for new messages
+    - Typing indicator animation
+    - Loading spinner for generation
+    - Skeleton loaders for content
