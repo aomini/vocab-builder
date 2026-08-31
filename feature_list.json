@@ -292,7 +292,7 @@
       "area": "design-system",
       "title": "Extract reusable Button component with variants",
       "user_visible_behavior": "Buttons across the app have consistent styling with primary (orange/amber bg, white text, rounded), secondary (border style), icon (square with hover bg), and disabled (reduced opacity) variants.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "src/components/ui/button.tsx exists with primary, secondary, icon, and disabled variants.",
         "New Chat, Send, and Stop buttons use the Button component instead of inline Pressable.",
@@ -303,8 +303,15 @@
         "npm run lint passes.",
         "Web, iOS, and Android render correctly."
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "src/components/ui/button.tsx created with primary, secondary, icon, danger variants plus disabled state",
+        "New Chat button in index.tsx uses Button component",
+        "Back, Send, Stop buttons in [id].tsx use Button component",
+        "Unused Pressable import removed from [id].tsx",
+        "lint passes clean",
+        "web, iOS, android exports verified"
+      ],
+      "notes": "Added danger variant for Stop button (red bg). Uses cn utility for class merging."
     },
     {
       "id": "ds-004",
