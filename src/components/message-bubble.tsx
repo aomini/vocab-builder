@@ -46,9 +46,9 @@ export function MessageBubble({ role, text }: MessageBubbleProps) {
   return (
     <Animated.View
       entering={FadeIn.duration(200)}
-      className={cn("mb-3 max-w-[80%] rounded-2xl px-4 py-3", {
-        "self-end bg-surface": isUser,
-        "self-start": !isUser,
+      className={cn("mb-3 rounded-2xl px-4 py-3", {
+        "self-end max-w-[80%] bg-surface": isUser,
+        "self-start w-full": !isUser,
       })}
     >
       {isUser ? (
