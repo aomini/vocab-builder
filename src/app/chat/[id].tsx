@@ -13,7 +13,7 @@ import Markdown from "react-native-markdown-display";
 import { useChat } from "../../store/chat-context";
 
 const markdownStyles = StyleSheet.create({
-  body: { color: "#111827", fontSize: 16, lineHeight: 22 },
+  body: { color: "#1A1A1A", fontSize: 16, lineHeight: 22 },
   paragraph: { marginTop: 0, marginBottom: 8 },
   heading1: { fontSize: 22, fontWeight: "700", marginBottom: 8 },
   heading2: { fontSize: 20, fontWeight: "700", marginBottom: 6 },
@@ -24,7 +24,7 @@ const markdownStyles = StyleSheet.create({
   strong: { fontWeight: "700" },
   em: { fontStyle: "italic" },
   code_inline: {
-    backgroundColor: "#d1d5db",
+    backgroundColor: "#E5E5E5",
     borderRadius: 4,
     paddingHorizontal: 4,
     paddingVertical: 1,
@@ -63,20 +63,20 @@ export default function ChatScreen() {
 
   return (
     <View
-      className="flex-1 bg-white"
+      className="flex-1 bg-background"
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
     >
-      <View className="flex-row items-center border-b border-gray-200 px-4 py-3">
+      <View className="flex-row items-center border-b border-border px-4 py-3">
         <Pressable onPress={() => router.back()} className="mr-3 p-1">
-          <Text className="text-lg text-blue-600">←</Text>
+          <Text className="text-lg text-primary">←</Text>
         </Pressable>
-        <Text className="text-lg font-semibold text-gray-900">New Chat</Text>
+        <Text className="text-lg font-semibold text-text">New Chat</Text>
       </View>
 
       {conversationMessages.length === 0 ? (
         <View className="flex-1 items-center justify-center px-6">
           <Text className="text-4xl">💬</Text>
-          <Text className="mt-4 text-center text-lg font-medium text-gray-700">
+          <Text className="mt-4 text-center text-lg font-medium text-text">
             Ask about any word or phrase
           </Text>
           <Text className="mt-2 text-center text-sm text-gray-400">
@@ -95,13 +95,11 @@ export default function ChatScreen() {
           renderItem={({ item }) => (
             <View
               className={`mb-3 max-w-[80%] rounded-2xl px-4 py-3 ${
-                item.role === "user"
-                  ? "self-end bg-blue-600"
-                  : "self-start bg-gray-200"
+                item.role === "user" ? "self-end bg-surface" : "self-start"
               }`}
             >
               {item.role === "user" ? (
-                <Text className="text-base text-white">{item.text}</Text>
+                <Text className="text-base text-text">{item.text}</Text>
               ) : (
                 <Markdown style={markdownStyles}>{item.text}</Markdown>
               )}
@@ -110,10 +108,10 @@ export default function ChatScreen() {
         />
       )}
 
-      <View className="border-t border-gray-200 px-4 py-3">
-        <View className="flex-row items-center rounded-full bg-gray-100 px-4 py-2">
+      <View className="border-t border-border px-4 py-3">
+        <View className="flex-row items-center rounded-full bg-surface px-4 py-2">
           <TextInput
-            className="flex-1 text-base text-gray-900"
+            className="flex-1 text-base text-text"
             placeholder="Type a word or phrase..."
             placeholderTextColor="#9ca3af"
             value={input}
@@ -131,7 +129,7 @@ export default function ChatScreen() {
           ) : (
             <Pressable
               onPress={handleSend}
-              className="ml-2 rounded-full bg-blue-600 px-4 py-2"
+              className="ml-2 rounded-full bg-primary px-4 py-2"
             >
               <Text className="font-medium text-white">Send</Text>
             </Pressable>
