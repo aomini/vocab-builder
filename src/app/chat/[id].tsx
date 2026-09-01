@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
-import { View, Text, TextInput, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Markdown from "react-native-markdown-display";
 import { useChat } from "../../store/chat-context";
 import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
 
 const markdownStyles = StyleSheet.create({
   body: { color: "#1A1A1A", fontSize: 16, lineHeight: 22 },
@@ -103,11 +104,10 @@ export default function ChatScreen() {
       )}
 
       <View className="border-t border-border px-4 py-3">
-        <View className="flex-row items-center rounded-full bg-surface px-4 py-2">
-          <TextInput
-            className="flex-1 text-base text-text"
+        <View className="flex-row items-center gap-2">
+          <Input
+            className="flex-1 rounded-full border-0 bg-surface"
             placeholder="Type a word or phrase..."
-            placeholderTextColor="#9ca3af"
             value={input}
             onChangeText={setInput}
             onSubmitEditing={handleSend}
@@ -117,10 +117,10 @@ export default function ChatScreen() {
             <Button
               onPress={stopStreaming}
               label="Stop"
-              className="ml-2 bg-red-500"
+              className="bg-red-500"
             />
           ) : (
-            <Button onPress={handleSend} label="Send" className="ml-2" />
+            <Button onPress={handleSend} label="Send" />
           )}
         </View>
       </View>
