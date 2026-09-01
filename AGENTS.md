@@ -17,6 +17,7 @@ Before writing Code:
 
 - Work on one feature at a moment in a separate branch.
 - Do not mark a feature complete just because code was added.
+- Create one PR per feature. Use `gh stacks` when features are sequential/stackable - each feature is based on previous ones, not on main.
 - Prefer durable repo artifacts over chat summaries.
 - Do not silently change verification rules during implementation.
 - Do not remove or weaken tests just to make the task look complete.
@@ -24,13 +25,13 @@ Before writing Code:
 
 ## Definition Of Done
 
-A feature is done only when all of the following are true:
+Before marking a feature as done, verify each item:
 
-- the target behavior is implemented
-- the required verification actually ran
-- evidence is recorded in `feature_list.json` with status passing
-- the repository remains restartable from the standard startup path
-- pr is created, use gh stacks if the features are stackable
+- [] Target behavior is implemented.
+- [] Pr is created on a dedicated branch.
+- [] Verfication successfully ran.
+- [] Feature list (`feature_list.json`) is updated with evidence & status.
+- [] Repo is restartable.
 
 ## End Of Session
 
@@ -57,6 +58,7 @@ Experiments enabled: `typedRoutes`, `reactCompiler`.
 - `npm run android` — start on Android emulator
 - `npm run web` — start web
 - `npm run lint` — eslint via `expo lint`
+- `npm run pretty` - prettier format code
 
 ## Structure
 
@@ -75,10 +77,9 @@ assets/         — images, fonts, icons
 
 - Environment variables can only be accessed with process.env in expo api routes and in app ui env variables should be prefixed with EXPO_PUBLIC_.
 - All features should run properly in web, ios & android.
-- Styling: CSS via `nativewind` + React Native Stylesheet where needed.
+- Styling: CSS via `nativewind` + React Native Stylesheet where needed. Styles must follow design system & use (var) variables intead of hex value directly.
 - Platform-specific files use `.web.tsx` / `.ios.tsx` / `.android.tsx` suffixes.
 - Component filenames are kebab-case (e.g. `themed-text.tsx`).
-- UI library: `@expo/ui` for built-in components.
 - Always prefer type over interfaces when creating types.
 - Class Interpolation: use the `src/app/utils/cn.ts` to resolve classnames. Also, use `{'active': true}` conditional approach.
 - Navigation: expo-router file-based routing — add screens as files in `src/app/`.<D-s>
@@ -86,6 +87,7 @@ assets/         — images, fonts, icons
 ## Verification
 
 - After code change, verify with below commands:
+  - `npm run pretty`
   - `npm run lint`
   - `npm run ios`
   - `npm run web`

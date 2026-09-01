@@ -241,6 +241,7 @@
       "verification": [
         "tailwind.config.js theme.extend defines: primary (#CC785C), background (white), surface (#F5F5F5), text (#1A1A1A), border (#E5E5E5).",
         "tailwind.config.js theme.extend defines fontFamily using the CSS variables in global.css (Inter, SF Pro, Roboto, system-ui stack).",
+        "Typography tokens defined: headings use font-semibold, body uses font-normal with leading-relaxed.",
         "Tokens are usable as Tailwind classes (e.g. bg-primary, text-text, bg-surface, border-border).",
         "npm run lint passes.",
         "Existing UI still renders on web, iOS, and Android (no regressions)."
@@ -283,6 +284,7 @@
         "Secondary variant: border style with hover fill.",
         "Icon variant: square shape with hover background.",
         "Disabled state: reduced opacity, no pointer events.",
+        "Natural elevation (shadow) on buttons.",
         "npm run lint passes.",
         "Web, iOS, and Android render correctly."
       ],
@@ -366,6 +368,23 @@
         "react-native-reanimated is used for animations (already installed).",
         "npm run lint passes.",
         "Web, iOS, and Android render correctly with animations."
+      ],
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "id": "ds-008",
+      "priority": 19,
+      "area": "design-system",
+      "title": "Add ripple effect animation on buttons",
+      "user_visible_behavior": "Non-disabled buttons show a ripple effect animation on press, giving tactile feedback to the user.",
+      "status": "not_started",
+      "verification": [
+        "Pressing any non-disabled button triggers a visible ripple animation.",
+        "Disabled buttons do not show the ripple effect.",
+        "Ripple works on primary, secondary, and icon button variants.",
+        "npm run lint passes.",
+        "Web, iOS, and Android render correctly."
       ],
       "evidence": [],
       "notes": ""

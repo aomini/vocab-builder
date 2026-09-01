@@ -19,6 +19,8 @@ design_system:
       - Secondary: Border style with hover fill
       - Icon buttons: Square with hover background
       - Disabled state: Reduced opacity, no pointer events
+      - Animation: Ripple effect on non disable buttons
+      - Elevation: Add natural elevation
     inputs:
       - Rounded borders with focus ring
       - Textarea auto-resize
