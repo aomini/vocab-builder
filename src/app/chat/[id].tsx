@@ -105,14 +105,16 @@ export default function ChatScreen() {
 
       <View className="border-t border-border px-4 py-3">
         <View className="flex-row items-center gap-2">
-          <Input
-            className="flex-1 rounded-full border-0 bg-surface"
-            placeholder="Type a word or phrase..."
-            value={input}
-            onChangeText={setInput}
-            onSubmitEditing={handleSend}
-            returnKeyType="send"
-          />
+          <View className="flex-1">
+            <Input
+              className="rounded-full border-0 bg-surface"
+              placeholder="Type a word or phrase..."
+              value={input}
+              onChangeText={setInput}
+              onSubmitEditing={handleSend}
+              returnKeyType="send"
+            />
+          </View>
           {isStreaming ? (
             <Button
               onPress={stopStreaming}
