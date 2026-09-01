@@ -1,16 +1,10 @@
 import { useState, useRef } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Pressable,
-  FlatList,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TextInput, FlatList, StyleSheet } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Markdown from "react-native-markdown-display";
 import { useChat } from "../../store/chat-context";
+import { Button } from "../../components/ui/button";
 
 const markdownStyles = StyleSheet.create({
   body: { color: "#1A1A1A", fontSize: 16, lineHeight: 22 },
@@ -67,9 +61,9 @@ export default function ChatScreen() {
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
     >
       <View className="flex-row items-center border-b border-border px-4 py-3">
-        <Pressable onPress={() => router.back()} className="mr-3 p-1">
+        <Button variant="icon" onPress={() => router.back()} className="mr-3">
           <Text className="text-lg text-primary">←</Text>
-        </Pressable>
+        </Button>
         <Text className="text-lg font-semibold text-text">New Chat</Text>
       </View>
 
@@ -120,19 +114,13 @@ export default function ChatScreen() {
             returnKeyType="send"
           />
           {isStreaming ? (
-            <Pressable
+            <Button
               onPress={stopStreaming}
-              className="ml-2 rounded-full bg-red-500 px-4 py-2"
-            >
-              <Text className="font-medium text-white">Stop</Text>
-            </Pressable>
+              label="Stop"
+              className="ml-2 bg-red-500"
+            />
           ) : (
-            <Pressable
-              onPress={handleSend}
-              className="ml-2 rounded-full bg-primary px-4 py-2"
-            >
-              <Text className="font-medium text-white">Send</Text>
-            </Pressable>
+            <Button onPress={handleSend} label="Send" className="ml-2" />
           )}
         </View>
       </View>

@@ -2,6 +2,7 @@ import { View, Text, Pressable, FlatList } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useChat } from "../store/chat-context";
+import { Button } from "../components/ui/button";
 
 export default function Index() {
   const router = useRouter();
@@ -17,12 +18,7 @@ export default function Index() {
     <View className="flex-1 bg-background" style={{ paddingTop: insets.top }}>
       <View className="flex-row items-center justify-between border-b border-border px-4 py-4">
         <Text className="text-2xl font-bold text-text">Chats</Text>
-        <Pressable
-          onPress={handleNewChat}
-          className="rounded-full bg-primary px-4 py-2"
-        >
-          <Text className="font-medium text-white">+ New Chat</Text>
-        </Pressable>
+        <Button onPress={handleNewChat} label="+ New Chat" />
       </View>
 
       {conversations.length === 0 ? (
