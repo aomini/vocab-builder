@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
+import Animated, { FadeIn } from "react-native-reanimated";
 import Markdown from "react-native-markdown-display";
 import { cn } from "../utils/cn";
 
@@ -43,7 +44,8 @@ export function MessageBubble({ role, text }: MessageBubbleProps) {
   const isUser = role === "user";
 
   return (
-    <View
+    <Animated.View
+      entering={FadeIn.duration(200)}
       className={cn("mb-3 max-w-[80%] rounded-2xl px-4 py-3", {
         "self-end bg-surface": isUser,
         "self-start": !isUser,
@@ -54,6 +56,6 @@ export function MessageBubble({ role, text }: MessageBubbleProps) {
       ) : (
         <Markdown style={markdownStyles}>{text}</Markdown>
       )}
-    </View>
+    </Animated.View>
   );
 }
