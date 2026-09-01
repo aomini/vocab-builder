@@ -1,5 +1,12 @@
 import { useState, useRef } from "react";
-import { View, Text, TextInput, Pressable, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  FlatList,
+  StyleSheet,
+} from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Markdown from "react-native-markdown-display";
@@ -82,7 +89,9 @@ export default function ChatScreen() {
           data={conversationMessages}
           keyExtractor={(item) => item.id}
           contentContainerClassName="px-4 py-3"
-          onContentSizeChange={() => listRef.current?.scrollToEnd({ animated: true })}
+          onContentSizeChange={() =>
+            listRef.current?.scrollToEnd({ animated: true })
+          }
           renderItem={({ item }) => (
             <View
               className={`mb-3 max-w-[80%] rounded-2xl px-4 py-3 ${
